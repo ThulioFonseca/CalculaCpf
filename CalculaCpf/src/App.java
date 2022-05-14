@@ -1,18 +1,20 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        
+        public static void main(String[] args) throws Exception {
+            long startTime = System.currentTimeMillis();
 
-        Scanner sc = new Scanner(System.in);
+            for(int i = 0; i < 64; i++) {
 
-        String cpf = sc.next();
+                ThreadWork threadWork = new ThreadWork();
+                threadWork.setName("t"+i);
+                threadWork.start();
+                threadWork.join();
+            }
+            
+            System.out.println("Tempo de execução: " + (System.currentTimeMillis() - startTime)/1000 + " s");
 
-        if (CpfValidation.isValid(cpf)) {
-            System.out.println("CPF válido");
-        } else {
-            System.out.println("CPF inválido");
-        }
+
 
 
     }

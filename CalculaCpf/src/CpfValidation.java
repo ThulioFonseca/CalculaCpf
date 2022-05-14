@@ -8,16 +8,16 @@ public class CpfValidation {
                 return false;
             }
             int d1 = 0;
+            int d2 = 0;
+            int sub_int = 0;
             for (int i = 0; i < 9; i++) {
-                d1 += Integer.parseInt(cpf.substring(i, i + 1)) * (10 - i);
+                sub_int = Integer.parseInt(cpf.substring(i, i + 1));
+                d1 += sub_int * (10 - i);
+                d2 += sub_int * (11 - i);
             }
             d1 = 11 - (d1 % 11);
             if (d1 > 9) {
                 d1 = 0;
-            }
-            int d2 = 0;
-            for (int i = 0; i < 9; i++) {
-                d2 += Integer.parseInt(cpf.substring(i, i + 1)) * (11 - i);
             }
             d2 += d1 * 2;
             d2 = 11 - (d2 % 11);
@@ -25,8 +25,7 @@ public class CpfValidation {
                 d2 = 0;
             }
 
-            if (d1 == Integer.parseInt(cpf.substring(9, 10)) && d2 == Integer.parseInt(cpf.substring(10, 11))){
-
+            if (Integer.toString(d1).equals(cpf.substring(9, 10)) && Integer.toString(d2).equals(cpf.substring(10, 11))){
                 return true;
             }
 
